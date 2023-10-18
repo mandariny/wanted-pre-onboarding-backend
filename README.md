@@ -8,6 +8,7 @@
 <img src="https://github.com/mandariny/wanted-pre-onboarding-backend/assets/87411479/852df626-d142-4c33-8419-5894315ea81f">
 
 ## API문서
+[Postman API Docs](https://documenter.getpostman.com/view/19511451/2s9YR9YXuT#062b0198-5446-4900-a579-1a32c22f6288)
 
 ## 실행방법
 1. 현재 리포지토리를 클론한다.
