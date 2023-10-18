@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import wanted.pre.onboarding.jobportal.dto.RecruitRequest;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,6 +39,13 @@ public class Recruit {
 
     @Column(name = "post_date")
     private LocalDateTime postDate;
+
+    public void update(RecruitRequest recruitRequest){
+        this.position = recruitRequest.getPosition();
+        this.reward = recruitRequest.getReward();
+        this.contents = recruitRequest.getContents();
+        this.skill = recruitRequest.getSkill();
+    }
 
     @Override
     public boolean equals(Object o) {

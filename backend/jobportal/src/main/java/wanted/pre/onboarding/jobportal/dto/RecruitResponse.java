@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RecruitPostResponse {
+public class RecruitResponse {
     private Long id;
 }
