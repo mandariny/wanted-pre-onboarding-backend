@@ -5,13 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import wanted.pre.onboarding.jobportal.domain.Company;
 import wanted.pre.onboarding.jobportal.domain.Recruit;
-import wanted.pre.onboarding.jobportal.dto.RecruitPostResponse;
+import wanted.pre.onboarding.jobportal.dto.RecruitResponse;
 import wanted.pre.onboarding.jobportal.dto.RecruitRequest;
 import wanted.pre.onboarding.jobportal.exception.NoSuchCompanyException;
+import wanted.pre.onboarding.jobportal.exception.NoSuchRecruitException;
 import wanted.pre.onboarding.jobportal.repository.CompanyRepository;
 import wanted.pre.onboarding.jobportal.repository.RecruitRepository;
-
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -20,7 +19,7 @@ public class RecruitService {
     private final CompanyRepository companyRepository;
     private final RecruitRepository recruitRepository;
 
-    public RecruitPostResponse saveRecruit(Long coompanyId, RecruitRequest recruitRequest) {
+    public RecruitResponse saveRecruit(Long coompanyId, RecruitRequest recruitRequest) {
         Company company = companyRepository.findById(coompanyId)
                 .orElseThrow(NoSuchCompanyException::new);
 
@@ -33,6 +32,15 @@ public class RecruitService {
                 .build();
 
         Recruit savedRecruit = recruitRepository.save(recruit);
-        return new RecruitPostResponse(savedRecruit.getId());
+        return new RecruitResponse(savedRecruit.getId());
+    }
+
+    public RecruitResponse updateRecruit(Long recruitId, RecruitRequest recruitRequest) {
+        Recruit recruit = recruitRepository.findById(recruitId).orElseThrow(NoSuchRecruitException::new);
+
+        recruit.update(recruitRequest);
+
+        Recruit updatedRecruit = recruitRepository.save(recruit);
+        return new RecruitResponse(updatedRecruit.getId());
     }
 }
